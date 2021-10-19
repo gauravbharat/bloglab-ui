@@ -22,10 +22,10 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    const currentUser = this._accountService.currentUserValue;
-    const isLoggedIn = currentUser && currentUser?.token;
+    // const currentUser = this._accountService.currentUserValue;
+    // const isLoggedIn = currentUser && currentUser?.token;
 
-    if (isLoggedIn) {
+    if (this._accountService.isLoggedIn) {
       return true;
     }
 

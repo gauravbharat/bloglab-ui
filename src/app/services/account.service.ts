@@ -17,13 +17,20 @@ export class AccountService {
   // new BehaviorSubject<ApplicationUser>({})
 
   constructor(private _http: HttpClient) {
+    const currentUserInfo = localStorage.getItem(this._currentUserKey);
+
     this.currentUserSubject$ = new BehaviorSubject<any>(
-      JSON.parse(localStorage.getItem(this._currentUserKey) ?? '')
+      currentUserInfo ? JSON.parse(currentUserInfo) : null
     );
   }
 
   get currentUserValue(): ApplicationUser | null {
     return this.currentUserSubject$.value;
+  }
+
+  get isLoggedIn(): boolean {
+    // this.currentUserValue !== null && this.currentUserValue?.token !== null
+    return !!this.currentUserValue && !!this.currentUserValue?.token;
   }
 
   private _setCurrentUser(user: ApplicationUser | null): void {
