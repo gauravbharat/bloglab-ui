@@ -5,6 +5,9 @@ import {
   HttpClientModule,
   HTTP_INTERCEPTORS,
 } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { ToastrModule } from 'ngx-toastr';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 
@@ -29,7 +32,6 @@ import { PhotoAlbumComponent } from './components/photo-album/photo-album.compon
 import { RegisterComponent } from './components/register/register.component';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
-import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import { ToastrModule } from 'ngx-toastr';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
     }),

@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'blogs', component: BlogsComponent },
   { path: 'blogs/:id', component: BlogComponent },
   {
-    path: 'photo-album/',
+    path: 'photo-album',
     component: PhotoAlbumComponent,
     canActivate: [AuthGuard],
   },

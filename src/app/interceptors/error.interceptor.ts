@@ -9,12 +9,14 @@ import { Observable, throwError } from 'rxjs';
 import { AccountService } from '../services/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
   constructor(
     private _toastr: ToastrService,
-    private _accountService: AccountService
+    private _accountService: AccountService,
+    private _router: Router
   ) {}
 
   intercept(
@@ -95,6 +97,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     this._accountService.logout();
     this._toastr.error(errorMessage, error?.statusText);
     console.log({ error });
+    this._router.navigate(['/login']);
   }
 
   handle500Error(error: any) {
