@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+
 import { ApplicationUserLogin } from 'src/app/models/account/application-user-login.model';
 import { AccountService } from 'src/app/services/account.service';
 
@@ -15,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private _accountService: AccountService,
     private _router: Router,
-    private _fb: FormBuilder
+    private _fb: FormBuilder,
+    private _toastr: ToastrService
   ) {
     if (_accountService.isLoggedIn) _router.navigate(['/dashboard']);
   }
@@ -62,6 +65,7 @@ export class LoginComponent implements OnInit {
     this._accountService.login(applicationUserLogin).subscribe(
       () => {
         this._router.navigate(['/dashboard']);
+        this._toastr.success('You are now logged-in', 'Login successful!');
       },
       (error) => console.log('login API', { error })
     );
