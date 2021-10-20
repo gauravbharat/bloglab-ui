@@ -37,7 +37,7 @@
     />
 
     <div class="invalid-feedback" *ngIf="hasError('username', 'required')">
-      Username required
+      Username is required
     </div>
 
     <div
@@ -63,7 +63,7 @@
     />
 
     <div class="invalid-feedback" *ngIf="hasError('email', 'required')">
-      Email required
+      Email is required
     </div>
 
     <div class="invalid-feedback" *ngIf="hasError('email', 'pattern')">
@@ -88,7 +88,7 @@
     />
 
     <div class="invalid-feedback" *ngIf="hasError('password', 'required')">
-      Password required
+      Password is required
     </div>
 
     <div
@@ -106,9 +106,12 @@
       type="password"
       [ngClass]="{
         'is-invalid':
-          isTouched('confirmPassword') && (formHasError('nomatch') || hasErrors('confirmPassword')),
+          isTouched('confirmPassword') &&
+          (formHasError('nomatch') || hasErrors('confirmPassword')),
         'is-valid':
-          isTouched('confirmPassword') && !formHasError('nomatch') && !hasErrors('confirmPassword')
+          isTouched('confirmPassword') &&
+          !formHasError('nomatch') &&
+          !hasErrors('confirmPassword')
       }"
       class="form-control form-control-lg"
       formControlName="confirmPassword"
@@ -119,13 +122,10 @@
       class="invalid-feedback"
       *ngIf="hasError('confirmPassword', 'required')"
     >
-      Confirm Password required
+      Confirm Password is required
     </div>
 
-    <div
-      class="invalid-feedback"
-      *ngIf="formHasError('nomatch')"
-    >
+    <div class="invalid-feedback" *ngIf="formHasError('nomatch')">
       Passwords do not match
     </div>
   </div>

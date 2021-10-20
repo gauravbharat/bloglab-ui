@@ -31,19 +31,21 @@
           <td>{{ userBlog.title | summary: 30 }}</td>
           <td>{{ userBlog.content | summary: 90 }}</td>
           <td>
-            <button
-              class="btn btn-info d-inline mr-1"
-              (click)="editBlog(userBlog.blogId)"
-            >
-              Edit
-            </button>
-            <button
-              *ngIf="!userBlog.deleteConfirm"
-              class="btn btn-danger d-inline"
-              (click)="confirmDelete(userBlog, true)"
-            >
-              Delete
-            </button>
+            <div class="d-flex">
+              <button
+                class="btn btn-info d-inline mr-1"
+                (click)="editBlog(userBlog.blogId)"
+              >
+                Edit
+              </button>
+              <button
+                *ngIf="!userBlog.deleteConfirm"
+                class="btn btn-danger d-inline"
+                (click)="confirmDelete(userBlog, true)"
+              >
+                Delete
+              </button>
+            </div>
 
             <div *ngIf="!!userBlog.deleteConfirm">
               Sure ?
