@@ -6,7 +6,7 @@
   <div class="d-flex">
     <a
       *ngIf="!isNew()"
-      routerLink="blogs/{{ blogForm?.get('blogId')?.value }}"
+      routerLink="/blogs/{{ blogForm?.get('blogId')?.value }}"
       class="badge badge-primary mb-2 p-2 mr-2"
     >
       Preview Blog</a
