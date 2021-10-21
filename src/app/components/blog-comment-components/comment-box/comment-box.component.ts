@@ -50,9 +50,9 @@ export class CommentBoxComponent {
 
     this._blogCommentService.create(blogCommentCreate).subscribe(
       (blogComment) => {
-        this.commentSaved.emit(blogComment);
-        this.resetComment();
         this._toastr.success('Comment saved.');
+        this.resetComment();
+        this.commentSaved.emit(blogComment);
       },
       (err) =>
         console.log('_blogCommentService.create API', {
