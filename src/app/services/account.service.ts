@@ -56,4 +56,8 @@ export class AccountService {
   logout(): void {
     this._setCurrentUser(null);
   }
+
+  givenUserIsLoggedIn(username: string): boolean {
+    return this.isLoggedIn && this.currentUserValue?.username === username;
+  }
 }

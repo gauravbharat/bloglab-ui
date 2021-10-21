@@ -16,9 +16,9 @@
     <img src="{{ blogPhotoUrl }}" class="blog-image img-fluid text-wrapper" />
     <p class="blog-content">{{ blog?.content }}</p>
   </div>
-</div>
 
-<app-comment-system
-  *ngIf="blog && blog?.blogId"
-  [blogId]="blog.blogId"
-></app-comment-system>
+  <app-comment-system
+    *ngIf="blog && blog?.blogId"
+    [blogId]="blog.blogId"
+  ></app-comment-system>
+</div>
