@@ -108,7 +108,11 @@ export class ErrorInterceptor implements HttpInterceptor {
   }
 
   handleUnexpectedError(error: any) {
-    this._toastr.error('Something unexpected happened.');
+    this._toastr.error(
+      error?.status === 0
+        ? 'Unable to Connect to the Server.'
+        : 'Something unexpected happened.'
+    );
     console.log({ error });
   }
 }
