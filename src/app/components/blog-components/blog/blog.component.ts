@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
+import * as CKEditor from '../../../../ckeditor';
+
 import { ToastrService } from 'ngx-toastr';
 import { Blog } from 'src/app/models/blog/blog.model';
 import { BlogService } from 'src/app/services/blog.service';
@@ -13,6 +16,21 @@ import { PhotoService } from 'src/app/services/photo.service';
 export class BlogComponent implements OnInit {
   blog!: Blog;
   blogPhotoUrl!: string;
+
+  public ckEditor = CKEditor;
+  public editorConfig = {
+    toolbar: [],
+  };
+
+  public onReady(editor: any) {
+    editor.ui
+      .getEditableElement()
+      .parentElement.insertBefore(
+        editor.ui.view.toolbar.element,
+        editor.ui.getEditableElement()
+      );
+    // console.log({ editor });
+  }
 
   constructor(
     private _route: ActivatedRoute,

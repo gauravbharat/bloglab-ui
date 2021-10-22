@@ -1,0 +1,3 @@
+::ng-deep .card-editor > .ck-editor__editable_inline {
+  max-height: 200px;
+}

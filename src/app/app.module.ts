@@ -14,6 +14,8 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -71,6 +73,7 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
     TypeaheadModule.forRoot(),
     CarouselModule.forRoot(),
     PaginationModule.forRoot(),
+    CKEditorModule,
   ],
   providers: [
     HttpClient,

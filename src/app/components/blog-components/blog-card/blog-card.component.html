@@ -6,15 +6,23 @@
   />
   <div class="card-body">
     <h4 class="card-title">{{ blog?.title }}</h4>
-    <p class="card-text" *ngIf="!!blogPhotoUrl">
+    <ckeditor
+      class="card-editor"
+      [editor]="ckEditor"
+      [config]="editorConfig"
+      data="{{ blog?.content }}"
+      (ready)="onReady($event)"
+      [disabled]="true"
+    ></ckeditor>
+    <!-- <p class="card-text" *ngIf="!!blogPhotoUrl">
       {{ blog.content | summary: 100 }}
     </p>
     <p class="card-text" *ngIf="!blogPhotoUrl">
       {{ blog.content | summary: 300 }}
-    </p>
+    </p> -->
 
     <button
-      class="btn btn-xs bg-primary text-light"
+      class="btn btn-xs bg-primary text-light mt-2"
       (click)="readMore(blog.blogId)"
     >
       Read More

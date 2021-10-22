@@ -15,6 +15,10 @@ import { Photo } from 'src/app/models/photo/photo.model';
 import { BlogService } from 'src/app/services/blog.service';
 import { PhotoService } from 'src/app/services/photo.service';
 
+import * as CKEditor from '../../../../ckeditor';
+import { environment } from 'src/environments/environment';
+import { AccountService } from 'src/app/services/account.service';
+
 @Component({
   selector: 'app-blog-edit',
   templateUrl: './blog-edit.component.html',
@@ -24,14 +28,118 @@ export class BlogEditComponent implements OnInit {
   blogForm!: FormGroup;
   confirmPhotoDelete: boolean = false;
   userPhotos: Photo[] = [];
+  charactersLength: any;
+  currentUser: any;
+  ckEditor = CKEditor;
+  editorConfig = {};
+
+  public onReady(editor: any) {
+    editor.ui
+      .getEditableElement()
+      .parentElement.insertBefore(
+        editor.ui.view.toolbar.element,
+        editor.ui.getEditableElement()
+      );
+
+    // console.log({ editor });
+  }
 
   constructor(
     private _route: ActivatedRoute,
     private _fb: FormBuilder,
     private _blogService: BlogService,
     private _photoService: PhotoService,
-    private _toastr: ToastrService
-  ) {}
+    private _toastr: ToastrService,
+    private _accountService: AccountService
+  ) {
+    this.currentUser = this._accountService.currentUserValue;
+
+    this.editorConfig = {
+      toolbar: [
+        'exportPdf',
+        'heading',
+        '|',
+        'fontSize',
+        'fontFamily',
+        'fontColor',
+        '|',
+        'bold',
+        'italic',
+        'underline',
+        'strikethrough',
+        'subscript',
+        'superscript',
+        'highlight',
+        '|',
+        'alignment',
+        'indent',
+        'outdent',
+        '|',
+        'numberedList',
+        'bulletedList',
+        '|',
+        'horizontalLine',
+        'link',
+        'blockQuote',
+        'insertImage',
+        'insertTable',
+        'mediaEmbed',
+        'todoList',
+        '|',
+        'undo',
+        'redo',
+      ],
+      image: {
+        toolbar: [
+          'imageStyle:inline',
+          'imageStyle:block',
+          'imageStyle:side',
+          '|',
+          'toggleImageCaption',
+          'imageTextAlternative',
+        ],
+        // styles: ['full', 'side', 'alignLeft', 'alignCenter', 'alignRight'],
+        // resizeOptions: [
+        //   {
+        //     name: 'imageResize:original',
+        //     label: 'Original',
+        //     value: null,
+        //   },
+        //   {
+        //     name: 'imageResize:50',
+        //     label: '50%',
+        //     value: '50',
+        //   },
+        //   {
+        //     name: 'imageResize:75',
+        //     label: '75%',
+        //     value: '75',
+        //   },
+        // ],
+      },
+      language: 'en',
+      table: {
+        contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'],
+      },
+      licenseKey: '',
+      wordCount: {
+        onUpdate: (stats: any) => {
+          this.charactersLength = stats.characters;
+          console.log(`Characters: ${stats.characters}\nWords: ${stats.words}`);
+        },
+      },
+      shouldNotGroupWhenFull: true,
+      // simpleUpload: {
+      //   uploadUrl: `${environment.webApi}/Photo`,
+      //   withCredentials: true,
+      //   headers: {
+      //     Authorization: `Bearer ${
+      //       this.currentUser ? this.currentUser?.token : ''
+      //     }`,
+      //   },
+      // },
+    };
+  }
 
   ngOnInit(): void {
     const blogId: number = parseInt(

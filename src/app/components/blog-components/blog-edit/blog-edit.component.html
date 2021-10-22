@@ -63,7 +63,7 @@
 
     <div class="form-group">
       <label for="content">Content</label>
-      <textarea
+      <!-- <textarea
         [ngClass]="{
           'is-invalid': isTouched('content') && hasErrors('content'),
           'is-valid': isTouched('content') && !hasErrors('content')
@@ -72,7 +72,16 @@
         formControlName="content"
         id="content"
         rows="20"
-      ></textarea>
+      ></textarea> -->
+
+      <ckeditor
+        [editor]="ckEditor"
+        [config]="editorConfig"
+        formControlName="content"
+        id="content"
+        (ready)="onReady($event)"
+        placeholder="Type or Paste the content here!"
+      ></ckeditor>
 
       <div class="invalid-feedback" *ngIf="hasError('content', 'required')">
         Content is required
